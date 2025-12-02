@@ -15,14 +15,7 @@ func isValid(num int) bool {
 }
 
 func main() {
-	f, err := os.Open("input.txt")
-	if err != nil {
-		f, err = os.Open("day02/input.txt")
-		if err != nil {
-			fmt.Println("Error opening input.txt:", err)
-			return
-		}
-	}
+	f, _ := os.Open("input.txt")
 	defer f.Close()
 
 	scanner := bufio.NewScanner(f)
@@ -31,16 +24,10 @@ func main() {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if strings.TrimSpace(line) == "" {
-			continue
-		}
 
 		ranges := strings.Split(line, ",")
 		for _, r := range ranges {
 			parts := strings.Split(r, "-")
-			if len(parts) != 2 {
-				continue
-			}
 			
 			start, _ := strconv.Atoi(strings.TrimSpace(parts[0]))
 			end, _ := strconv.Atoi(strings.TrimSpace(parts[1]))
